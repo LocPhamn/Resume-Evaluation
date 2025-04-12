@@ -1,0 +1,7 @@
+spacy
+streamlit
+streamlit-tags
+wordninja
+sentence-transformers
+pdfminer.six
+torch  # Required for sentence-transformers

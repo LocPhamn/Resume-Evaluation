@@ -69,6 +69,9 @@ This project is a Resume Evaluation web application built with **Streamlit**, ut
 - Regex for text processing
 
 ---
+## Screenshots
+![Resume UI](./images/resume.png)
+![Resume UI](./images/resume2.png)
 
 ## 📦 Installation
 
