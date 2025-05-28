@@ -20,11 +20,20 @@ import streamlit as st
 
 
 def pdf_reader(file):
-    resource_manager = PDFResourceManager() # cung cấp tai nguyên giúp định vị lấy thông tin chính xác
-    fake_file_handle = io.StringIO() # mở ra file lưu trữ ảo tránh ghi file tạm
-    converter = TextConverter(resource_manager, fake_file_handle, laparams=LAParams()) # sử dụng tài nguyên và file ảo chuyển đổi nd -> text
-    page_interpreter = PDFPageInterpreter(resource_manager, converter) # lật trang dùng thêm tài nguyên và chuyển đổii
-    with open(file, 'rb') as fh: # Mở file ở chế độ nhị phân ('rb') vì PDF là định dạng binary, không thể mở như text bình thường
+    # cung cấp tai nguyên giúp định vị lấy thông tin chính xác
+    resource_manager = PDFResourceManager()
+
+    # mở ra file lưu trữ ảo tránh ghi file tạm
+    fake_file_handle = io.StringIO()
+
+    # sử dụng tài nguyên và file ảo chuyển đổi nd -> text
+    converter = TextConverter(resource_manager, fake_file_handle, laparams=LAParams())
+
+    # lật trang dùng thêm tài nguyên và chuyển đổi
+    page_interpreter = PDFPageInterpreter(resource_manager, converter)
+
+    # Mở file ở chế độ nhị phân ('rb') vì PDF là định dạng binary, không thể mở như text bình thường
+    with open(file, 'rb') as fh:
         for page in PDFPage.get_pages(fh,
                                       caching=True,
                                       check_extractable=True):
@@ -199,7 +208,7 @@ def run(model):
         resume = extract_information(save_pdf_path)
 
         if resume:
-            ## Get the whole resume data
+            # Lấy tất cả thông tin cv
             resume_text = pdf_reader(save_pdf_path)
 
             st.header("**Resume Analysis**")
@@ -216,7 +225,7 @@ def run(model):
             except:
                 pass
 
-            # Job skills
+            # Các skills
             ds_skills = ['tensorflow', 'keras', 'pytorch', 'machine learning', 'deep Learning', 'flask',
                          'streamlit']
             web_skills = ['react native', 'asp.net', 'javascript', 'nextjs', 'django', 'nodejs', 'reactjs', 'php',
